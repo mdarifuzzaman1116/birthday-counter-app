@@ -1,32 +1,3 @@
-function updateProgressBar() {
-    const now = new Date();
-    // Next birthday (year increment)
-    let nextBirthdayYear = now.getFullYear();
-    const birthMonth = birthDate.getMonth();
-    const birthDay = birthDate.getDate();
-    const birthHour = birthDate.getHours();
-    const birthMinute = birthDate.getMinutes();
-    // If birthday this year has passed, use next year
-    const thisYearBirthday = new Date(nextBirthdayYear, birthMonth, birthDay, birthHour, birthMinute);
-    if (now >= thisYearBirthday) {
-        nextBirthdayYear++;
-    }
-    const nextBirthday = new Date(nextBirthdayYear, birthMonth, birthDay, birthHour, birthMinute);
-    // Last birthday
-    const lastBirthday = new Date(nextBirthdayYear - 1, birthMonth, birthDay, birthHour, birthMinute);
-    // Progress calculation
-    const totalMs = nextBirthday - lastBirthday;
-    const elapsedMs = now - lastBirthday;
-    let percent = Math.min(100, Math.max(0, (elapsedMs / totalMs) * 100));
-    document.getElementById('progress-bar-fill').style.width = percent + '%';
-    // Label: days until next birthday
-    const msLeft = nextBirthday - now;
-    const daysLeft = Math.floor(msLeft / (1000 * 60 * 60 * 24));
-    document.getElementById('progress-label').textContent = `${daysLeft} days until next birthday (${nextBirthdayYear})`;
-}
-// Birthday Counter for Inaya
-// Born: August 5th, 2025 at 1:50 AM EST
-
 
 // Inaya's Birthday Counter
 // Born: August 5, 2025 at 1:50am EST
@@ -41,6 +12,8 @@ function updateCounters() {
         document.getElementById('weeks-counter').textContent = '0 weeks 0 days';
         document.getElementById('months-counter').textContent = '0 months 0 days';
         document.getElementById('timer-counter').textContent = formatCountdown(-diffMs) + ' until birth';
+        document.getElementById('progress-bar-fill').style.width = '0%';
+        document.getElementById('progress-label').textContent = 'Not born yet';
         return;
     }
 
@@ -62,6 +35,9 @@ function updateCounters() {
     const nextIncrement = getNextIncrement(now);
     const msUntilNext = nextIncrement - now;
     document.getElementById('timer-counter').textContent = formatCountdown(msUntilNext) + ` until ${days + 1} days old`;
+
+    // Progress bar to next birthday
+    updateProgressBar(now);
 }
 
 function getNextIncrement(now) {
@@ -86,6 +62,32 @@ function formatCountdown(ms) {
     return `${hours}h ${minutes}m ${seconds}s`;
 }
 
+function updateProgressBar(now) {
+    // Next birthday (year increment)
+    let nextBirthdayYear = now.getFullYear();
+    const birthMonth = birthDate.getMonth();
+    const birthDay = birthDate.getDate();
+    const birthHour = birthDate.getHours();
+    const birthMinute = birthDate.getMinutes();
+    // If birthday this year has passed, use next year
+    const thisYearBirthday = new Date(nextBirthdayYear, birthMonth, birthDay, birthHour, birthMinute);
+    if (now >= thisYearBirthday) {
+        nextBirthdayYear++;
+    }
+    const nextBirthday = new Date(nextBirthdayYear, birthMonth, birthDay, birthHour, birthMinute);
+    // Last birthday
+    const lastBirthday = new Date(nextBirthdayYear - 1, birthMonth, birthDay, birthHour, birthMinute);
+    // Progress calculation
+    const totalMs = nextBirthday - lastBirthday;
+    const elapsedMs = now - lastBirthday;
+    let percent = Math.min(100, Math.max(0, (elapsedMs / totalMs) * 100));
+    document.getElementById('progress-bar-fill').style.width = percent + '%';
+    // Label: days until next birthday
+    const msLeft = nextBirthday - now;
+    const daysLeft = Math.floor(msLeft / (1000 * 60 * 60 * 24));
+    document.getElementById('progress-label').textContent = `${daysLeft} days until next birthday (${nextBirthdayYear})`;
+}
+
 function scheduleDailyUpdate() {
     const now = new Date();
     const nextIncrement = getNextIncrement(now);
@@ -98,10 +100,6 @@ function scheduleDailyUpdate() {
 
 document.addEventListener('DOMContentLoaded', () => {
     updateCounters();
-    updateProgressBar();
     scheduleDailyUpdate();
-    setInterval(() => {
-        updateCounters();
-        updateProgressBar();
-    }, 1000); // Real-time timer and progress
+    setInterval(updateCounters, 1000); // Real-time timer and progress
 });
