@@ -1,106 +1,271 @@
+:root {
+  --bg: #0c0d0f;
+  --surface: #141518;
+  --surface-2: #1c1e22;
+  --border: rgba(255,255,255,0.06);
+  --border-accent: rgba(255,255,255,0.12);
+  --text-primary: #f0f0f0;
+  --text-secondary: #888;
+  --text-muted: #555;
+  --accent: #e8c97a;
+  --accent-dim: rgba(232, 201, 122, 0.12);
+  --accent-glow: rgba(232, 201, 122, 0.25);
+  --timer: #7ab8e8;
+  --timer-dim: rgba(122, 184, 232, 0.10);
+  --highlight: #f5e6c0;
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Inter', 'Roboto', Arial, sans-serif;
-  background: linear-gradient(135deg, #232526 0%, #414345 100%);
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  color: #f8ffae;
-  overflow: hidden;
+  color: var(--text-primary);
+  overflow-x: hidden;
+  padding: 2rem 1rem 3rem;
+}
+
+/* Subtle grid background */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .container {
-  max-width: 430px;
-  width: 100vw;
-  margin: 0 auto;
-  background: rgba(34,37,38,0.95);
-  border-radius: 18px;
-  box-shadow: 0 4px 16px rgba(67,198,172,0.10);
-  padding: 1.5rem 1rem 1rem 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(90deg, #43c6ac, #f8ffae);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-align: center;
-}
-
-.cards {
+  position: relative;
+  z-index: 1;
+  max-width: 480px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 1.25rem;
 }
 
-.card {
-  background: linear-gradient(120deg, #232526 0%, #414345 100%);
-  border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(67,198,172,0.10);
-  padding: 1.1rem 0.7rem;
+/* Header */
+header {
   text-align: center;
-  transition: transform 0.2s;
-  color: #f8ffae;
+  padding: 2rem 0 0.5rem;
+}
+
+.star-icon {
+  font-size: 1.1rem;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+  display: block;
+  letter-spacing: 8px;
+  opacity: 0.8;
+}
+
+h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3.2rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Cards layout */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.card-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+/* Base card */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.4rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .card:hover {
-  transform: translateY(-4px) scale(1.03);
+  border-color: var(--border-accent);
+  transform: translateY(-2px);
 }
 
-.card h2 {
-  font-size: 1.15rem;
-  font-weight: 600;
-  margin-bottom: 0.4rem;
-  color: #43c6ac;
+/* Highlight card */
+.card--highlight {
+  background: var(--accent-dim);
+  border-color: rgba(232, 201, 122, 0.2);
+  padding: 1.5rem 1.4rem;
 }
 
+.card--highlight:hover {
+  border-color: rgba(232, 201, 122, 0.35);
+}
+
+.card--highlight .card-label {
+  color: var(--accent);
+  opacity: 0.8;
+}
+
+.card--highlight .counter {
+  color: var(--highlight);
+}
+
+/* Timer card */
+.card--timer {
+  background: var(--timer-dim);
+  border-color: rgba(122, 184, 232, 0.15);
+}
+
+.card--timer:hover {
+  border-color: rgba(122, 184, 232, 0.3);
+}
+
+.card--timer .card-label {
+  color: var(--timer);
+  opacity: 0.8;
+}
+
+.card--timer .counter {
+  color: #a8d4f5;
+}
+
+/* Card label */
+.card-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+/* Counters */
 .counter {
-  font-size: 1.7rem;
-  font-weight: 700;
-  color: #f8ffae;
-  margin: 0.4rem 0 0 0;
-  letter-spacing: 1px;
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
 }
 
+.counter--sm {
+  font-size: 1.4rem;
+}
+
+.counter--mono {
+  font-family: 'DM Sans', monospace;
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+}
+
+/* Progress bar */
+.progress-bar-bg {
+  position: relative;
+  background: var(--surface-2);
+  border-radius: 100px;
+  height: 6px;
+  overflow: hidden;
+  margin: 0.5rem 0 0.75rem;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--accent) 0%, #f5d98a 100%);
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #f5e6c0;
+  box-shadow: 0 0 8px 3px var(--accent-glow);
+}
+
+.progress-label {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Footer */
 footer {
-  margin-top: 1rem;
-  font-size: 0.85rem;
-  color: #f8ffae;
   text-align: center;
+  padding: 0.5rem 0 1rem;
 }
 
-@media (max-width: 600px) {
+footer p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+/* Mobile */
+@media (max-width: 500px) {
   body {
-    overflow: hidden;
+    padding: 1rem 0.75rem 2rem;
   }
-  .container {
-    max-width: 100vw;
-    padding: 1rem 0.3rem 0.3rem 0.3rem;
-  }
-  .cards {
-    gap: 0.5rem;
-  }
-  .card {
-    padding: 0.9rem 0.4rem;
-  }
+
   h1 {
-    font-size: 1.3rem;
+    font-size: 2.6rem;
   }
+
+  .card {
+    padding: 1rem 1.1rem;
+  }
+
+  .card--highlight {
+    padding: 1.25rem 1.1rem;
+  }
+
   .counter {
-    font-size: 1.3rem;
+    font-size: 1.9rem;
   }
-  .card h2 {
-    font-size: 1rem;
+
+  .counter--sm {
+    font-size: 1.2rem;
   }
-  .progress-label {
-    font-size: 0.9rem;
+
+  .counter--mono {
+    font-size: 1.2rem;
   }
 }
