@@ -177,3 +177,27 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCounters();
     setInterval(updateCounters, 1000);
 });
+
+// Countries Inaya has visited
+const countriesVisited = [
+  { name: 'United States', flag: '🇺🇸', note: 'Home' },
+  { name: 'Saudi Arabia',  flag: '🇸🇦', note: '' },
+];
+
+function renderCountries() {
+  const list = document.getElementById('countries-list');
+  const count = document.getElementById('countries-count');
+  if (!list) return;
+  list.innerHTML = countriesVisited.map(c =>
+    `<div class="country-item">
+      <span class="country-flag">${c.flag}</span>
+      <span class="country-name">${c.name}${c.note ? `<span class="country-note"> · ${c.note}</span>` : ''}</span>
+    </div>`
+  ).join('');
+  const n = countriesVisited.length;
+  count.textContent = `${n} countr${n === 1 ? 'y' : 'ies'} visited`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderCountries();
+});
