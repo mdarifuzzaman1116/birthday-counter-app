@@ -148,7 +148,7 @@ function updateCounters() {
 
     // Monthly birthday milestone label
     document.getElementById('monthly-bday-counter').textContent =
-        `She just turned ${ordinal(monthsElapsed)} month old!`;
+        `${ordinal(monthsElapsed)} month old! ✦`;
 
     // Countdown to next monthly birthday
     const nextMonthly = getNextMonthlyBirthday(nyNow);
