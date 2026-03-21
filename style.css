@@ -181,10 +181,13 @@ footer p {
   background: rgba(0,0,0,0);
   pointer-events: none;
   transition: background 0.35s ease;
+  overflow: hidden;
+  visibility: hidden;
 }
 .countries-overlay.active {
   background: rgba(0,0,0,0.65);
   pointer-events: all;
+  visibility: visible;
 }
 
 .overlay-sheet {
@@ -193,7 +196,7 @@ footer p {
   border-radius: 22px 22px 0 0;
   border-top: 1px solid rgba(255,255,255,0.08);
   padding: 0 0 env(safe-area-inset-bottom, 1.5rem);
-  transform: translateY(100%);
+  transform: translateY(110%);
   transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
   max-height: 88dvh;
   display: flex; flex-direction: column;
