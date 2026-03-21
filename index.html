@@ -3,39 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Birthday Counter App</title>
+  <title>Inaya's Birthday Counter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="bg-grid"></div>
   <div class="container">
-    <h1>Inaya's Birthday Counter</h1>
+
+    <header>
+      <div class="star-icon">✦</div>
+      <h1>Inaya</h1>
+      <p class="subtitle">Born August 5, 2025 &middot; 1:50 AM</p>
+    </header>
+
     <div class="cards">
-      <div class="card" id="days-card">
-        <h2>Days Since Birth</h2>
-        <p class="counter" id="days-counter">0</p>
+
+      <div class="card card--highlight" id="monthly-card">
+        <div class="card-label">Monthly Milestone</div>
+        <p class="counter" id="monthly-bday-counter">Loading...</p>
       </div>
-      <div class="card" id="weeks-card">
-        <h2>Weeks & Days</h2>
-        <p class="counter" id="weeks-counter">0 weeks 0 days</p>
+
+      <div class="card-row">
+        <div class="card" id="days-card">
+          <div class="card-label">Days Old</div>
+          <p class="counter" id="days-counter">0</p>
+        </div>
+        <div class="card" id="weeks-card">
+          <div class="card-label">Weeks &amp; Days</div>
+          <p class="counter counter--sm" id="weeks-counter">0w 0d</p>
+        </div>
       </div>
+
       <div class="card" id="months-card">
-        <h2>Months & Days</h2>
-        <p class="counter" id="months-counter">0 months 0 days</p>
+        <div class="card-label">True Age</div>
+        <p class="counter counter--sm" id="months-counter">0 months 0 days</p>
       </div>
-      <div class="card" id="timer-card">
-        <h2>Next Age Increment</h2>
-        <p class="counter" id="timer-counter">Loading...</p>
+
+      <div class="card card--timer" id="timer-card">
+        <div class="card-label">Next Monthly Birthday</div>
+        <p class="counter counter--mono" id="timer-counter">Loading...</p>
       </div>
+
       <div class="card" id="progress-card">
-        <h2>Progress to Next Birthday</h2>
+        <div class="card-label">Month Progress</div>
         <div class="progress-bar-bg">
           <div class="progress-bar-fill" id="progress-bar-fill"></div>
+          <div class="progress-glow" id="progress-bar-fill-glow"></div>
         </div>
         <p class="progress-label" id="progress-label">Loading...</p>
       </div>
+
     </div>
+
     <footer>
-      <p>For my Inaya &mdash; Born August 5, 2025</p>
+      <p>Made with love &middot; For our Inaya ✦</p>
     </footer>
   </div>
   <script src="script.js"></script>
