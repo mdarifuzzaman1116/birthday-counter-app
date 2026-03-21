@@ -47,7 +47,7 @@
         <p class="counter counter--mono" id="timer-counter">Loading...</p>
       </div>
 
-      <div class="card-row card-row--bottom">
+      <div class="card-row">
         <div class="card" id="progress-card">
           <div class="card-label">Month Progress</div>
           <div class="progress-bar-bg">
@@ -56,12 +56,11 @@
           <p class="progress-label" id="progress-label">Loading...</p>
         </div>
 
-        <!-- Flip card -->
-        <div class="card-flip-wrapper" id="countries-card">
-          <div class="card-flip-inner">
-            <div class="card card--countries card-face card-face--front" id="countries-front"></div>
-            <div class="card card--countries card-face card-face--back" id="countries-back"></div>
-          </div>
+        <div class="card card--countries" id="countries-card">
+          <div class="card-label">Countries ✈</div>
+          <div class="countries-flags" id="countries-flags"></div>
+          <p class="countries-count" id="countries-count"></p>
+          <p class="flip-hint">Tap to explore</p>
         </div>
       </div>
 
@@ -71,6 +70,20 @@
       <p>Made with love &middot; For our Inaya ✦</p>
     </footer>
   </div>
+
+  <!-- Full screen countries overlay -->
+  <div class="countries-overlay" id="countries-overlay">
+    <div class="overlay-sheet" id="overlay-sheet">
+      <div class="overlay-handle"></div>
+      <div class="overlay-header">
+        <h2 class="overlay-title">Inaya's World</h2>
+        <button class="overlay-close" id="overlay-close">✕</button>
+      </div>
+      <div class="overlay-subtitle" id="overlay-subtitle"></div>
+      <div class="overlay-list" id="overlay-list"></div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
