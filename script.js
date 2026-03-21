@@ -241,68 +241,133 @@ function openCapsule(index) {
     if (!c || !c.timeCapsule) return;
     const tc = c.timeCapsule;
 
-    const buildFlightRow = (f) => `
-        <div class="flight-row${f.cancelled ? ' flight-cancelled' : ''}">
-            <div class="flight-row-top">
-                <span class="flight-num">${f.flight}</span>
-                ${f.cancelled ? '<span class="flight-tag cancelled">Cancelled</span>' : ''}
-                ${f.note ? `<span class="flight-tag reroute">↺ ${f.note}</span>` : ''}
-            </div>
-            <div class="flight-row-route">
-                <div class="flight-point"><div class="flight-code">${f.from.split(' · ')[0]}</div><div class="flight-city">${f.from.split(' · ')[1]}</div><div class="flight-time">${f.dep}</div></div>
-                <div class="flight-line"><span class="flight-dur">${f.duration}</span><div class="flight-bar"></div></div>
-                <div class="flight-point right"><div class="flight-code">${f.to.split(' · ')[0]}</div><div class="flight-city">${f.to.split(' · ')[1]}</div><div class="flight-time">${f.arr}</div></div>
-            </div>
-            <div class="flight-meta">${f.airline} · ${f.date}${f.seat ? ' · Seat ' + f.seat : ''}</div>
-        </div>
-    `;
-
-    const buildFlights = (flights) => `
-        <div class="capsule-section">
-            <div class="capsule-section-header">
-                <span class="capsule-section-icon">✈</span>
-                <div>
-                    <div class="capsule-section-label">Flight Details</div>
-                    <div class="capsule-section-city">Outbound · Qatar Airways</div>
+    const buildFlightLeg = (f, groupLabel) => `
+        <div class="tc-flight-leg${f.cancelled ? ' cancelled' : ''}">
+            <div class="tc-leg-header">
+                <div class="tc-leg-airline">
+                    ${groupLabel ? `<span class="tc-leg-group">${groupLabel}</span>` : ''}
+                    <span class="tc-leg-num">${f.flight}</span>
+                    <span class="tc-leg-airline-name">${f.airline}</span>
+                    ${f.cancelled ? '<span class="tc-badge cancelled">Cancelled</span>' : ''}
+                    ${f.note && !f.cancelled ? '<span class="tc-badge reroute">Emergency</span>' : ''}
                 </div>
+                <span class="tc-leg-date">${f.date}</span>
             </div>
-            ${flights.outbound.map(buildFlightRow).join('')}
-            <div class="flight-divider">Return · Original (Cancelled — Gulf War)</div>
-            ${flights.returnOriginal.map(buildFlightRow).join('')}
-            <div class="flight-divider emergency">Emergency Rebook · Turkish Airlines</div>
-            ${flights.returnActual.map(buildFlightRow).join('')}
-        </div>
-    `;
-
-    const buildSection = (section, label, icon) => `
-        <div class="capsule-section">
-            <div class="capsule-section-header">
-                <span class="capsule-section-icon">${icon}</span>
-                <div>
-                    <div class="capsule-section-label">${label}</div>
-                    <div class="capsule-section-city">${section.city}</div>
+            <div class="tc-leg-route">
+                <div class="tc-leg-point">
+                    <div class="tc-leg-iata">${f.from.split(' · ')[0]}</div>
+                    <div class="tc-leg-city">${f.from.split(' · ')[1]}</div>
+                    <div class="tc-leg-time">${f.dep}</div>
                 </div>
-            </div>
-            <div class="capsule-weather">🌡 ${section.weather}</div>
-            <div class="capsule-moments">
-                <div class="capsule-moment-group good">
-                    <div class="capsule-moment-title">✦ Highlights</div>
-                    ${section.good.map(g => `<div class="capsule-moment-item">${g}</div>`).join('')}
+                <div class="tc-leg-middle">
+                    <div class="tc-leg-dur">${f.duration}</div>
+                    <div class="tc-leg-line">
+                        <div class="tc-leg-dot left"></div>
+                        <div class="tc-leg-dash"></div>
+                        <svg class="tc-plane-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+                        <div class="tc-leg-dash"></div>
+                        <div class="tc-leg-dot right"></div>
+                    </div>
+                    ${f.seat ? `<div class="tc-leg-seat">Seat ${f.seat}</div>` : (f.note ? `<div class="tc-leg-seat note">${f.note}</div>` : '')}
                 </div>
-                <div class="capsule-moment-group bad">
-                    <div class="capsule-moment-title">↓ In The News</div>
-                    ${section.bad.map(b => `<div class="capsule-moment-item">${b}</div>`).join('')}
+                <div class="tc-leg-point right">
+                    <div class="tc-leg-iata">${f.to.split(' · ')[0]}</div>
+                    <div class="tc-leg-city">${f.to.split(' · ')[1]}</div>
+                    <div class="tc-leg-time">${f.arr}</div>
                 </div>
             </div>
         </div>
     `;
 
-    document.getElementById('capsule-title').textContent = `${c.flag} ${c.name} · ${formatTravelDate(c.travelDate)}`;
-    document.getElementById('capsule-age').textContent = `Inaya was ${ageAtDate(c.travelDate)}`;
-    document.getElementById('capsule-body').innerHTML =
-        buildFlights(tc.flights) +
-        buildSection(tc.departure, 'Leaving Home', '🛫') +
-        buildSection(tc.arrival, 'Arriving', '🛬');
+    const buildFlightsTab = (flights) => `
+        <div class="tc-tab-content" id="tc-tab-flights">
+            <div class="tc-flight-group">
+                <div class="tc-group-label outbound">🛫 Outbound · Qatar Airways</div>
+                ${flights.outbound.map(f => buildFlightLeg(f, '')).join('')}
+            </div>
+            <div class="tc-flight-group">
+                <div class="tc-group-label cancelled-label">Original Return · Cancelled due to Gulf War</div>
+                ${flights.returnOriginal.map(f => buildFlightLeg(f, '')).join('')}
+            </div>
+            <div class="tc-flight-group">
+                <div class="tc-group-label emergency-label">⚡ Emergency Rebook · Turkish Airlines</div>
+                ${flights.returnActual.map(f => buildFlightLeg(f, '')).join('')}
+            </div>
+        </div>
+    `;
+
+    const buildStoryTab = (section, tabId) => `
+        <div class="tc-tab-content" id="tc-tab-${tabId}">
+            <div class="tc-story-location">
+                <div class="tc-story-city">${section.city}</div>
+                <div class="tc-story-weather">
+                    <span class="tc-weather-icon">🌡</span>
+                    <span>${section.weather}</span>
+                </div>
+            </div>
+            <div class="tc-story-section good">
+                <div class="tc-story-section-label">
+                    <span class="tc-dot good"></span>
+                    Moments to Remember
+                </div>
+                <div class="tc-story-items">
+                    ${section.good.map((g, i) => `
+                        <div class="tc-story-item">
+                            <div class="tc-item-num">${String(i+1).padStart(2,'0')}</div>
+                            <div class="tc-item-text">${g}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            <div class="tc-story-section bad">
+                <div class="tc-story-section-label">
+                    <span class="tc-dot bad"></span>
+                    The World Around Us
+                </div>
+                <div class="tc-story-items">
+                    ${section.bad.map((b, i) => `
+                        <div class="tc-story-item">
+                            <div class="tc-item-num">${String(i+1).padStart(2,'0')}</div>
+                            <div class="tc-item-text">${b}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('capsule-title').textContent = `${c.flag} ${c.name}`;
+    document.getElementById('capsule-age').textContent = `Inaya was ${ageAtDate(c.travelDate)} · ${formatTravelDate(c.travelDate)}`;
+
+    document.getElementById('capsule-body').innerHTML = `
+        <div class="tc-tabs">
+            <button class="tc-tab active" data-tab="flights">✈ Flights</button>
+            <button class="tc-tab" data-tab="departure">🛫 Departure</button>
+            <button class="tc-tab" data-tab="arrival">🛬 Arrival</button>
+        </div>
+        <div class="tc-tab-panels">
+            ${buildFlightsTab(tc.flights)}
+            ${buildStoryTab(tc.departure, 'departure')}
+            ${buildStoryTab(tc.arrival, 'arrival')}
+        </div>
+    `;
+
+    // Show first tab, hide others
+    document.querySelectorAll('.tc-tab-content').forEach((el, i) => {
+        el.style.display = i === 0 ? 'block' : 'none';
+    });
+
+    // Tab switching
+    document.querySelectorAll('.tc-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.tc-tab').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const target = btn.dataset.tab;
+            document.querySelectorAll('.tc-tab-content').forEach(panel => {
+                panel.style.display = panel.id === 'tc-tab-' + target ? 'block' : 'none';
+            });
+        });
+    });
 
     document.getElementById('capsule-overlay').classList.add('active');
 }
