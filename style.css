@@ -92,7 +92,7 @@ h1 {
   text-transform: uppercase;
 }
 
-/* Cards */
+/* Cards container - fills all remaining space */
 .cards {
   flex: 1;
   display: flex;
@@ -101,19 +101,34 @@ h1 {
   overflow: hidden;
 }
 
+/* Every direct child card or card-row grows equally */
+.cards > .card,
+.cards > .card-row,
+.cards > #progress-card {
+  flex: 1;
+  min-height: 0;
+}
+
 .card-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(0.28rem, 0.9vh, 0.5rem);
-  flex-shrink: 0;
+}
+
+/* Cards inside the row also stretch */
+.card-row > .card {
+  flex: 1;
+  min-height: 0;
 }
 
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: clamp(0.45rem, 1.4vh, 0.75rem) clamp(0.7rem, 2.5vw, 1rem);
-  flex-shrink: 0;
+  padding: clamp(0.45rem, 1.4vh, 0.85rem) clamp(0.7rem, 2.5vw, 1rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .card--highlight {
@@ -144,7 +159,7 @@ h1 {
 
 .counter {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.15rem, 3.8vh, 1.7rem);
+  font-size: clamp(1.15rem, 3.8vh, 1.9rem);
   font-weight: 400;
   color: var(--text-primary);
   line-height: 1.1;
@@ -152,15 +167,26 @@ h1 {
 }
 
 .counter--sm {
-  font-size: clamp(0.9rem, 2.8vh, 1.2rem);
+  font-size: clamp(0.9rem, 2.8vh, 1.35rem);
 }
 
 .counter--mono {
   font-family: 'DM Sans', monospace;
-  font-size: clamp(0.85rem, 2.6vh, 1.15rem);
+  font-size: clamp(0.85rem, 2.6vh, 1.2rem);
   font-weight: 300;
   letter-spacing: 0.03em;
   white-space: nowrap;
+}
+
+.counter--milestone {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.1rem, 3.6vh, 1.7rem);
+  font-weight: 400;
+  color: var(--highlight);
+  line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Progress */
@@ -168,7 +194,7 @@ h1 {
   background: var(--surface-2);
   border-radius: 100px;
   height: 4px;
-  margin: clamp(0.2rem, 0.7vh, 0.38rem) 0;
+  margin: clamp(0.2rem, 0.7vh, 0.4rem) 0;
   position: relative;
   overflow: visible;
 }
@@ -195,7 +221,7 @@ h1 {
 }
 
 .progress-label {
-  font-size: clamp(0.58rem, 1.4vh, 0.68rem);
+  font-size: clamp(0.58rem, 1.4vh, 0.7rem);
   color: var(--text-secondary);
   line-height: 1.35;
 }
@@ -211,16 +237,4 @@ footer p {
   font-size: clamp(0.55rem, 1.4vh, 0.67rem);
   color: var(--text-muted);
   letter-spacing: 0.06em;
-}
-
-/* Milestone counter - fits on one line always */
-.counter--milestone {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.1rem, 3.6vh, 1.6rem);
-  font-weight: 400;
-  color: var(--highlight);
-  line-height: 1.15;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
