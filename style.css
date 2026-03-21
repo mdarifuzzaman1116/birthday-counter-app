@@ -238,3 +238,58 @@ footer p {
   color: var(--text-muted);
   letter-spacing: 0.06em;
 }
+
+/* Countries card */
+.card--countries {
+  background: rgba(100, 200, 140, 0.07);
+  border-color: rgba(100, 200, 140, 0.15);
+}
+
+.card--countries .card-label {
+  color: #7ecfa0;
+  opacity: 0.9;
+}
+
+.countries-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.12rem, 0.5vh, 0.22rem);
+  flex: 1;
+  justify-content: center;
+}
+
+.country-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.country-flag {
+  font-size: clamp(0.9rem, 2.5vh, 1.2rem);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.country-name {
+  font-size: clamp(0.62rem, 1.6vh, 0.75rem);
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.country-note {
+  font-weight: 300;
+  color: var(--text-muted);
+  font-size: 0.9em;
+}
+
+.countries-count {
+  font-size: clamp(0.52rem, 1.3vh, 0.62rem);
+  color: #7ecfa0;
+  opacity: 0.7;
+  margin-top: clamp(0.1rem, 0.4vh, 0.2rem);
+  letter-spacing: 0.04em;
+}
