@@ -108,34 +108,34 @@ const countriesVisited = [
             },
             departure: {
                 city: 'New York City · Feb 24, 2026',
-                weather: '27°F / -3°C · Partly cloudy, bitter cold NW winds at 11mph',
+                weather: '27°F / -3°C · Partly cloudy, bitter cold with strong NW winds',
                 good: [
-                    'The 2026 Winter Olympics were underway in Milan & Cortina, Italy — Team USA was competing on the slopes',
-                    'Bad Bunny had just made Grammy history — first Spanish-language album ever to win Album of the Year',
-                    'Trump gave his first State of the Union of his 2nd term on Feb 24 — US economy showing strong growth',
-                    'Denmark called a snap election over Greenland — world politics were shifting fast'
+                    'The night we left NYC with you, the 2026 Winter Olympics were live in Milan & Cortina — the whole world was watching athletes compete on the slopes of Italy.',
+                    'Bad Bunny had just made Grammy history that month — the first Spanish-language album ever to win Album of the Year. Music was everywhere as we packed for this trip.',
+                    'It was the same day as President Trump\'s State of the Union address — we were at JFK boarding our Qatar Airways flight as the country tuned in.',
+                    'The world felt big and alive that night. We buckled you in, and we took off into the dark sky, heading east toward a place we had always dreamed of taking you.'
                 ],
                 bad: [
-                    'NYC gripped by brutal cold snap — one of the coldest Februarys in years, near-freezing temps',
-                    'US-Iran nuclear talks in Geneva just collapsed with no deal — military buildup in Middle East underway',
-                    'Russia-Ukraine war entered its 4th year — Russian drone strike hit Dnipro killing 15 miners',
-                    'Pakistan launched "open warfare" airstrikes on Afghanistan — regional chaos escalating'
+                    'New York was freezing the night we left — one of the coldest Februarys in years. We bundled you up as tight as we could before heading to the airport.',
+                    'Tensions between the US and Iran were at a boiling point that week. Nuclear talks in Geneva had just fallen apart and the US military was amassing in the Middle East.',
+                    'Russia and Ukraine were still at war — it had just entered its 4th year. A Russian drone had killed 15 coal miners in Dnipro just days before we flew out.',
+                    'Pakistan had declared open war on Afghanistan that same week. The world we flew away from was restless — but we held you close and went anyway.'
                 ]
             },
             arrival: {
                 city: 'Makkah & Madinah, Saudi Arabia · Feb 25 to Mar 2, 2026',
-                weather: '88-90°F / 31-32°C · Sunny, warm and dry — perfect skies for worship, cool nights',
+                weather: '88-90°F / 31-32°C · Warm, sunny and dry — a world away from the NYC cold we left behind',
                 good: [
-                    'You performed Umrah at Masjid al-Haram with Inaya — she stood before the Kaaba at just 6 months old',
-                    'Makkah was filled with pilgrims from across the Muslim world — millions gathered in prayer together',
-                    'Weather was ideal the entire stay — warm days, cool evenings, clear starlit nights, zero rain',
-                    'You also visited Madinah and the Prophet\'s Mosque before flying home'
+                    'We brought you to Masjid al-Haram and stood with you right in front of the Kaaba. You were 6 months old, wide-eyed and completely still. We made dua for you right there and we cried.',
+                    'Millions of Muslims from every corner of the world were gathered around us in prayer. We want you to know that the first big crowd you ever stood in was the crowd of the Ummah.',
+                    'The weather was perfect our entire stay — warm days, cool evenings, and clear skies every night. It felt like the place itself was welcoming you.',
+                    'We also visited Madinah and prayed at the Prophet\'s Mosque together as a family. We held you close the whole time and whispered prayers over you.'
                 ],
                 bad: [
-                    'Feb 28 (while Inaya was in Makkah): US & Israel launched "Operation Epic Fury" — joint strikes on Iran killed Supreme Leader Khamenei. The Middle East erupted.',
-                    'Iran retaliated with missiles hitting Gulf states — Qatar airspace closed, your original QR return via Doha was cancelled.',
-                    'Mar 1-2: 6+ waves of Iranian drone and missile strikes on Gulf cities — explosions in Doha and Dubai, regional airports shut down.',
-                    'You had to emergency-rebook in the middle of a war — switched to Turkish Airlines from Madinah via Istanbul to JFK, arriving home March 2 instead of March 7.'
+                    'On February 28th, while we were in Makkah holding you, the US and Israel launched massive strikes on Iran — killing Supreme Leader Khamenei. The entire Middle East went into shock overnight.',
+                    'Iran fired back with missiles targeting Gulf states. Qatar\'s airspace shut down completely. Our original Qatar Airways flight home through Doha was cancelled while we slept.',
+                    'For two days, explosions were being reported in Doha and Dubai. Airports across the region closed one by one. We were in the holiest city on earth while a war broke out around us.',
+                    'We decided to get you home as fast as we could. We found the last available seats on a Turkish Airlines flight out of Madinah and rebooked on the spot — flying home through Istanbul, landing March 2nd, five days earlier than planned. We were scared, but we kept you safe. That is all that mattered.'
                 ]
             }
         }
