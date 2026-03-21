@@ -93,30 +93,35 @@ const countriesVisited = [
         name: 'Saudi Arabia', flag: '🇸🇦', note: 'Makkah', photo: SA_PHOTO, travelDate: '2026-02-26',
         timeCapsule: {
             departure: {
-                city: 'New York City',
-                weather: '27°F / -3°C · Partly cloudy, bitter cold NW winds',
+                city: 'New York City · Feb 26, 2026',
+                weather: '27°F / -3°C · Partly cloudy, bitter cold NW winds at 11mph',
                 good: [
-                    'The 2026 Winter Olympics were live in Milan, Italy — Team USA was competing',
-                    'NASA's Artemis II crew moon mission had just launched earlier that month',
-                    'Grammy Awards 2026 had just happened — Bad Bunny made history winning Album of the Year with the first Spanish-language album ever'
+                    'The 2026 Winter Olympics were live in Milan & Cortina, Italy — Team USA was competing on the slopes',
+                    'Bad Bunny had just made Grammy history — first Spanish-language album ever to win Album of the Year',
+                    'Trump delivered his first State of the Union of his 2nd term on Feb 24 — US economy was growing',
+                    'Denmark called a snap election over Greenland — world politics were shifting fast'
                 ],
                 bad: [
-                    'NYC was in the middle of a brutal cold snap — one of the coldest Februarys in years',
-                    'US-Iran nuclear tensions were high — indirect talks happening in Geneva',
-                    'Russia-Ukraine war entered its 4th year with no end in sight'
+                    'NYC gripped by brutal cold snap — one of the coldest Februarys in years, near-freezing temps',
+                    'US-Iran nuclear talks in Geneva just collapsed with no deal — military buildup in Middle East underway',
+                    'Russia-Ukraine war entered its 4th year — Russian drone strike hit Dnipro killing 15 miners',
+                    'Pakistan launched "open warfare" airstrikes on Afghanistan — regional chaos escalating'
                 ]
             },
             arrival: {
-                city: 'Makkah, Saudi Arabia',
-                weather: '88°F / 31°C · Sunny, warm and dry — a complete contrast to NYC',
+                city: 'Makkah, Saudi Arabia · Feb 26 to Mar 2, 2026',
+                weather: '88-90°F / 31-32°C · Sunny, warm and dry — perfect skies for worship, cool nights',
                 good: [
-                    'You performed Umrah at the Masjid al-Haram with Inaya — she saw the Kaaba for the first time',
-                    'Makkah was beautifully lit at night with millions of pilgrims from around the world',
-                    'The weather was perfect for worship — warm evenings, clear skies, gentle breeze'
+                    'You performed Umrah at Masjid al-Haram with Inaya — she stood before the Kaaba at just 6 months old',
+                    'Makkah was filled with pilgrims from across the Muslim world — millions gathered in prayer together',
+                    'Weather was ideal the entire stay — warm days, cool evenings, clear starlit nights, zero rain',
+                    'Saudi Arabia was actively mediating Pakistan-Afghanistan tensions — a sign of the Kingdom's global role'
                 ],
                 bad: [
-                    'Huge crowds during Umrah season made moving around Masjid al-Haram challenging with a baby',
-                    'Long flights from JFK meant Inaya had to travel through the night'
+                    'Feb 28 (while Inaya was in Makkah): US & Israel launched "Operation Epic Fury" — joint strikes on Iran that killed Supreme Leader Khamenei. The Middle East erupted.',
+                    'Iran retaliated with missiles hitting Gulf states — Qatar, UAE, and Saudi Arabia's Ras Tanura oil refinery were all targeted. Regional airspace closed.',
+                    'Mar 1-2: Iran launched 6+ waves of drone and missile strikes on US bases and Gulf cities — explosions heard in Doha and Dubai as you were preparing to fly home.',
+                    'It was one of the most historic and dangerous weeks in the Middle East in decades — and Inaya was right there in the heart of the Muslim world as it unfolded.'
                 ]
             }
         }
