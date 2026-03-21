@@ -287,3 +287,10 @@ footer p {
 .overlay-age {
   font-size: 0.72rem; color: var(--text-muted);
 }
+
+.overlay-date {
+  font-size: 0.7rem;
+  color: var(--accent);
+  opacity: 0.8;
+  letter-spacing: 0.02em;
+}
