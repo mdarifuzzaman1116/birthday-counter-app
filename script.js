@@ -92,13 +92,27 @@ const countriesVisited = [
     {
         name: 'Saudi Arabia', flag: '🇸🇦', note: 'Makkah', photo: SA_PHOTO, travelDate: '2026-02-26',
         timeCapsule: {
+            flights: {
+                outbound: [
+                    { date: 'Feb 24, 2026', flight: 'QR702', from: 'JFK · New York', to: 'DOH · Doha', dep: '9:00 PM', arr: '5:15 PM (+1)', duration: '12h 15m', seat: '16H', airline: 'Qatar Airways' },
+                    { date: 'Feb 25, 2026', flight: 'QR1188', from: 'DOH · Doha', to: 'JED · Jeddah', dep: '6:00 PM', arr: '8:35 PM', duration: '2h 35m', seat: '29J', airline: 'Qatar Airways' }
+                ],
+                returnOriginal: [
+                    { date: 'Mar 2, 2026', flight: 'QR1179', from: 'MED · Madinah', to: 'DOH · Doha', dep: '12:20 PM', arr: '2:25 PM', duration: '2h 05m', seat: '03A', airline: 'Qatar Airways', cancelled: true },
+                    { date: 'Mar 7, 2026', flight: 'QR701', from: 'DOH · Doha', to: 'JFK · New York', dep: '8:45 AM', arr: '3:00 PM', duration: '14h 15m', seat: '35D', airline: 'Qatar Airways', cancelled: true }
+                ],
+                returnActual: [
+                    { date: 'Mar 2, 2026', flight: 'TK109', from: 'MED · Madinah', to: 'IST · Istanbul', dep: '1:55 PM', arr: '5:45 PM', duration: '3h 50m', airline: 'Turkish Airlines', note: 'Emergency rebook due to Gulf war' },
+                    { date: 'Mar 2, 2026', flight: 'TK11', from: 'IST · Istanbul', to: 'JFK · New York', dep: '7:30 PM', arr: '10:25 PM', duration: '10h 55m', airline: 'Turkish Airlines', note: '1h 45m layover in Istanbul' }
+                ]
+            },
             departure: {
-                city: 'New York City · Feb 26, 2026',
+                city: 'New York City · Feb 24, 2026',
                 weather: '27°F / -3°C · Partly cloudy, bitter cold NW winds at 11mph',
                 good: [
-                    'The 2026 Winter Olympics were live in Milan & Cortina, Italy — Team USA was competing on the slopes',
+                    'The 2026 Winter Olympics were underway in Milan & Cortina, Italy — Team USA was competing on the slopes',
                     'Bad Bunny had just made Grammy history — first Spanish-language album ever to win Album of the Year',
-                    'Trump delivered his first State of the Union of his 2nd term on Feb 24 — US economy was growing',
+                    'Trump gave his first State of the Union of his 2nd term on Feb 24 — US economy showing strong growth',
                     'Denmark called a snap election over Greenland — world politics were shifting fast'
                 ],
                 bad: [
@@ -109,19 +123,19 @@ const countriesVisited = [
                 ]
             },
             arrival: {
-                city: 'Makkah, Saudi Arabia · Feb 26 to Mar 2, 2026',
+                city: 'Makkah & Madinah, Saudi Arabia · Feb 26 to Mar 2, 2026',
                 weather: '88-90°F / 31-32°C · Sunny, warm and dry — perfect skies for worship, cool nights',
                 good: [
                     'You performed Umrah at Masjid al-Haram with Inaya — she stood before the Kaaba at just 6 months old',
                     'Makkah was filled with pilgrims from across the Muslim world — millions gathered in prayer together',
                     'Weather was ideal the entire stay — warm days, cool evenings, clear starlit nights, zero rain',
-                    'Saudi Arabia was actively mediating Pakistan-Afghanistan tensions — a sign of the Kingdom\'s global role'
+                    'You also visited Madinah and the Prophet\'s Mosque before flying home'
                 ],
                 bad: [
-                    'Feb 28 (while Inaya was in Makkah): US & Israel launched "Operation Epic Fury" — joint strikes on Iran that killed Supreme Leader Khamenei. The Middle East erupted.',
-                    'Iran retaliated with missiles hitting Gulf states — Qatar, UAE, and Saudi Arabia\'s Ras Tanura oil refinery were all targeted. Regional airspace closed.',
-                    'Mar 1-2: Iran launched 6+ waves of drone and missile strikes on US bases and Gulf cities — explosions heard in Doha and Dubai as you were preparing to fly home.',
-                    'It was one of the most historic and dangerous weeks in the Middle East in decades — and Inaya was right there in the heart of the Muslim world as it unfolded.'
+                    'Feb 28 (while Inaya was in Makkah): US & Israel launched "Operation Epic Fury" — joint strikes on Iran killed Supreme Leader Khamenei. The Middle East erupted.',
+                    'Iran retaliated with missiles hitting Gulf states — Qatar airspace closed, your original QR return via Doha was cancelled.',
+                    'Mar 1-2: 6+ waves of Iranian drone and missile strikes on Gulf cities — explosions in Doha and Dubai, regional airports shut down.',
+                    'You had to emergency-rebook in the middle of a war — switched to Turkish Airlines from Madinah via Istanbul to JFK, arriving home March 2 instead of March 7.'
                 ]
             }
         }
@@ -227,6 +241,39 @@ function openCapsule(index) {
     if (!c || !c.timeCapsule) return;
     const tc = c.timeCapsule;
 
+    const buildFlightRow = (f) => `
+        <div class="flight-row${f.cancelled ? ' flight-cancelled' : ''}">
+            <div class="flight-row-top">
+                <span class="flight-num">${f.flight}</span>
+                ${f.cancelled ? '<span class="flight-tag cancelled">Cancelled</span>' : ''}
+                ${f.note ? `<span class="flight-tag reroute">↺ ${f.note}</span>` : ''}
+            </div>
+            <div class="flight-row-route">
+                <div class="flight-point"><div class="flight-code">${f.from.split(' · ')[0]}</div><div class="flight-city">${f.from.split(' · ')[1]}</div><div class="flight-time">${f.dep}</div></div>
+                <div class="flight-line"><span class="flight-dur">${f.duration}</span><div class="flight-bar"></div></div>
+                <div class="flight-point right"><div class="flight-code">${f.to.split(' · ')[0]}</div><div class="flight-city">${f.to.split(' · ')[1]}</div><div class="flight-time">${f.arr}</div></div>
+            </div>
+            <div class="flight-meta">${f.airline} · ${f.date}${f.seat ? ' · Seat ' + f.seat : ''}</div>
+        </div>
+    `;
+
+    const buildFlights = (flights) => `
+        <div class="capsule-section">
+            <div class="capsule-section-header">
+                <span class="capsule-section-icon">✈</span>
+                <div>
+                    <div class="capsule-section-label">Flight Details</div>
+                    <div class="capsule-section-city">Outbound · Qatar Airways</div>
+                </div>
+            </div>
+            ${flights.outbound.map(buildFlightRow).join('')}
+            <div class="flight-divider">Return · Original (Cancelled — Gulf War)</div>
+            ${flights.returnOriginal.map(buildFlightRow).join('')}
+            <div class="flight-divider emergency">Emergency Rebook · Turkish Airlines</div>
+            ${flights.returnActual.map(buildFlightRow).join('')}
+        </div>
+    `;
+
     const buildSection = (section, label, icon) => `
         <div class="capsule-section">
             <div class="capsule-section-header">
@@ -253,6 +300,7 @@ function openCapsule(index) {
     document.getElementById('capsule-title').textContent = `${c.flag} ${c.name} · ${formatTravelDate(c.travelDate)}`;
     document.getElementById('capsule-age').textContent = `Inaya was ${ageAtDate(c.travelDate)}`;
     document.getElementById('capsule-body').innerHTML =
+        buildFlights(tc.flights) +
         buildSection(tc.departure, 'Leaving Home', '🛫') +
         buildSection(tc.arrival, 'Arriving', '🛬');
 
