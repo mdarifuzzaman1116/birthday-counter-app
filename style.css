@@ -7,30 +7,25 @@
   --text-secondary: #888;
   --text-muted: #555;
   --accent: #e8c97a;
-  --accent-dim: rgba(232, 201, 122, 0.10);
-  --accent-glow: rgba(232, 201, 122, 0.25);
+  --accent-dim: rgba(232,201,122,0.10);
+  --accent-glow: rgba(232,201,122,0.25);
   --timer: #7ab8e8;
-  --timer-dim: rgba(122, 184, 232, 0.08);
+  --timer-dim: rgba(122,184,232,0.08);
   --highlight: #f5e6c0;
   --green: #7ecfa0;
-  --green-dim: rgba(100, 200, 140, 0.07);
-  --green-border: rgba(100, 200, 140, 0.15);
+  --green-dim: rgba(100,200,140,0.07);
+  --green-border: rgba(100,200,140,0.15);
   --radius: 13px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html, body {
-  height: 100%;
-  overflow: hidden;
-  touch-action: none;
-}
+html, body { height: 100%; overflow: hidden; touch-action: none; }
 
 body {
   font-family: 'DM Sans', sans-serif;
   background: var(--bg);
   height: 100dvh;
-  max-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,332 +35,252 @@ body {
 }
 
 .bg-grid {
-  position: fixed;
-  inset: 0;
+  position: fixed; inset: 0;
   background-image:
     linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
   background-size: 40px 40px;
-  pointer-events: none;
-  z-index: 0;
+  pointer-events: none; z-index: 0;
 }
 
 .container {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 460px;
-  height: 100dvh;
-  max-height: 100dvh;
-  display: flex;
-  flex-direction: column;
+  position: relative; z-index: 1;
+  width: 100%; max-width: 460px;
+  height: 100dvh; max-height: 100dvh;
+  display: flex; flex-direction: column;
   padding: env(safe-area-inset-top, 0.5rem) 0 env(safe-area-inset-bottom, 0.5rem);
   overflow: hidden;
 }
 
 header {
-  text-align: center;
-  flex-shrink: 0;
-  padding: clamp(0.4rem, 2vh, 0.9rem) 0 clamp(0.3rem, 1.2vh, 0.6rem);
+  text-align: center; flex-shrink: 0;
+  padding: clamp(0.4rem,2vh,0.9rem) 0 clamp(0.3rem,1.2vh,0.6rem);
 }
 
 .star-icon {
-  font-size: 0.75rem;
-  color: var(--accent);
-  margin-bottom: clamp(0.1rem, 0.5vh, 0.25rem);
-  display: block;
-  letter-spacing: 6px;
-  opacity: 0.7;
+  font-size: 0.75rem; color: var(--accent);
+  margin-bottom: clamp(0.1rem,0.5vh,0.25rem);
+  display: block; letter-spacing: 6px; opacity: 0.7;
 }
 
 h1 {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.6rem, 5.5vh, 2.4rem);
-  font-weight: 400;
-  color: var(--text-primary);
-  line-height: 1;
-  margin-bottom: clamp(0.1rem, 0.4vh, 0.25rem);
+  font-size: clamp(1.6rem,5.5vh,2.4rem);
+  font-weight: 400; color: var(--text-primary);
+  line-height: 1; margin-bottom: clamp(0.1rem,0.4vh,0.25rem);
 }
 
 .subtitle {
-  font-size: clamp(0.55rem, 1.4vh, 0.67rem);
-  color: var(--text-muted);
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
+  font-size: clamp(0.55rem,1.4vh,0.67rem);
+  color: var(--text-muted); letter-spacing: 0.11em; text-transform: uppercase;
 }
 
-/* Cards */
 .cards {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(0.28rem, 0.9vh, 0.5rem);
-  overflow: hidden;
+  flex: 1; display: flex; flex-direction: column;
+  gap: clamp(0.28rem,0.9vh,0.5rem); overflow: hidden;
 }
 
-.cards > .card,
-.cards > .card-row {
-  flex: 1;
-  min-height: 0;
-}
+.cards > .card, .cards > .card-row { flex: 1; min-height: 0; }
 
 .card-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(0.28rem, 0.9vh, 0.5rem);
-  flex: 1;
-  min-height: 0;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(0.28rem,0.9vh,0.5rem); flex: 1; min-height: 0;
 }
 
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: clamp(0.45rem, 1.4vh, 0.85rem) clamp(0.7rem, 2.5vw, 1rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 0;
+  padding: clamp(0.45rem,1.4vh,0.85rem) clamp(0.7rem,2.5vw,1rem);
+  display: flex; flex-direction: column; justify-content: center; min-height: 0;
 }
 
-/* Highlight card */
-.card--highlight {
-  background: var(--accent-dim);
-  border-color: rgba(232, 201, 122, 0.18);
-}
+.card--highlight { background: var(--accent-dim); border-color: rgba(232,201,122,0.18); }
 .card--highlight .card-label { color: var(--accent); opacity: 0.85; }
 .card--highlight .counter { color: var(--highlight); }
 
-/* Timer card */
-.card--timer {
-  background: var(--timer-dim);
-  border-color: rgba(122, 184, 232, 0.12);
-}
+.card--timer { background: var(--timer-dim); border-color: rgba(122,184,232,0.12); }
 .card--timer .card-label { color: var(--timer); opacity: 0.85; }
 .card--timer .counter { color: #a8d4f5; }
 
-/* Countries card */
 .card--countries {
-  background: var(--green-dim);
-  border-color: var(--green-border);
-  cursor: pointer;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
+  background: var(--green-dim); border-color: var(--green-border);
+  cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent;
+  transition: border-color 0.2s, background 0.2s;
 }
+.card--countries:active { background: rgba(100,200,140,0.13); }
 
 .card-label {
-  font-size: clamp(0.52rem, 1.3vh, 0.62rem);
-  font-weight: 500;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: clamp(0.08rem, 0.35vh, 0.2rem);
-  white-space: nowrap;
-  flex-shrink: 0;
+  font-size: clamp(0.52rem,1.3vh,0.62rem); font-weight: 500;
+  letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: clamp(0.08rem,0.35vh,0.2rem);
+  white-space: nowrap; flex-shrink: 0;
 }
 
 .counter {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.15rem, 3.8vh, 1.9rem);
-  font-weight: 400;
-  color: var(--text-primary);
-  line-height: 1.1;
-  white-space: nowrap;
+  font-size: clamp(1.15rem,3.8vh,1.9rem);
+  font-weight: 400; color: var(--text-primary); line-height: 1.1; white-space: nowrap;
 }
-.counter--sm { font-size: clamp(0.9rem, 2.8vh, 1.35rem); }
+.counter--sm { font-size: clamp(0.9rem,2.8vh,1.35rem); }
 .counter--mono {
   font-family: 'DM Sans', monospace;
-  font-size: clamp(0.85rem, 2.6vh, 1.2rem);
-  font-weight: 300;
-  letter-spacing: 0.03em;
-  white-space: nowrap;
+  font-size: clamp(0.85rem,2.6vh,1.2rem);
+  font-weight: 300; letter-spacing: 0.03em; white-space: nowrap;
 }
 .counter--milestone {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.1rem, 3.6vh, 1.7rem);
-  font-weight: 400;
-  color: var(--highlight);
-  line-height: 1.15;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: clamp(1.1rem,3.6vh,1.7rem);
+  font-weight: 400; color: var(--highlight); line-height: 1.15;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
-/* Progress bar */
 .progress-bar-bg {
-  background: var(--surface-2);
-  border-radius: 100px;
-  height: 4px;
-  margin: clamp(0.2rem, 0.7vh, 0.4rem) 0;
-  position: relative;
-  overflow: visible;
-  flex-shrink: 0;
+  background: var(--surface-2); border-radius: 100px; height: 4px;
+  margin: clamp(0.2rem,0.7vh,0.4rem) 0; position: relative; overflow: visible; flex-shrink: 0;
 }
 .progress-bar-fill {
-  height: 100%;
-  border-radius: 100px;
+  height: 100%; border-radius: 100px;
   background: linear-gradient(90deg, var(--accent) 0%, #f5d98a 100%);
-  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
+  transition: width 0.8s cubic-bezier(0.4,0,0.2,1); position: relative;
 }
 .progress-bar-fill::after {
-  content: '';
-  position: absolute;
-  right: -1px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #f5e6c0;
+  content: ''; position: absolute; right: -1px; top: 50%; transform: translateY(-50%);
+  width: 7px; height: 7px; border-radius: 50%; background: #f5e6c0;
   box-shadow: 0 0 5px 2px var(--accent-glow);
 }
 .progress-label {
-  font-size: clamp(0.58rem, 1.4vh, 0.7rem);
-  color: var(--text-secondary);
-  line-height: 1.35;
+  font-size: clamp(0.58rem,1.4vh,0.7rem); color: var(--text-secondary); line-height: 1.35;
 }
 
-/* ── Flip Card ─────────────────────────────────────────── */
-.card-flip-wrapper {
-  perspective: 1000px;
-  min-height: 0;
-  cursor: pointer;
+/* Countries card summary */
+.countries-flags {
+  font-size: clamp(1.2rem,3.5vh,1.6rem);
+  line-height: 1; letter-spacing: 0.1em;
+  margin: clamp(0.1rem,0.4vh,0.25rem) 0 clamp(0.06rem,0.25vh,0.15rem);
+}
+.countries-count {
+  font-size: clamp(0.62rem,1.6vh,0.75rem); font-weight: 500; color: var(--text-primary);
+}
+.flip-hint {
+  font-size: clamp(0.5rem,1.2vh,0.58rem); color: var(--green);
+  opacity: 0.6; margin-top: clamp(0.06rem,0.25vh,0.12rem); letter-spacing: 0.05em;
+}
+
+footer {
+  text-align: center; flex-shrink: 0;
+  padding: clamp(0.2rem,0.8vh,0.45rem) 0 clamp(0.3rem,1vh,0.5rem);
+}
+footer p {
+  font-size: clamp(0.55rem,1.4vh,0.67rem); color: var(--text-muted); letter-spacing: 0.06em;
+}
+
+/* ── Countries Overlay ─────────────────────────────────────────────────── */
+.countries-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(0,0,0,0);
+  pointer-events: none;
+  transition: background 0.35s ease;
+}
+.countries-overlay.active {
+  background: rgba(0,0,0,0.65);
+  pointer-events: all;
+}
+
+.overlay-sheet {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: #171a1d;
+  border-radius: 22px 22px 0 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 0 0 env(safe-area-inset-bottom, 1.5rem);
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+  max-height: 88dvh;
+  display: flex; flex-direction: column;
+}
+.countries-overlay.active .overlay-sheet {
+  transform: translateY(0);
+}
+
+.overlay-handle {
+  width: 36px; height: 4px; border-radius: 2px;
+  background: rgba(255,255,255,0.15);
+  margin: 0.75rem auto 0;
+  flex-shrink: 0;
+}
+
+.overlay-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.9rem 1.4rem 0.2rem;
+  flex-shrink: 0;
+}
+
+.overlay-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem; font-weight: 400; color: var(--text-primary);
+}
+
+.overlay-close {
+  background: var(--surface-2); border: 1px solid var(--border);
+  color: var(--text-muted); border-radius: 50%;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
 
-.card-flip-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+.overlay-subtitle {
+  font-size: 0.75rem; color: var(--text-muted);
+  padding: 0 1.4rem 0.9rem; letter-spacing: 0.05em; flex-shrink: 0;
 }
 
-.card-flip-wrapper.flipped .card-flip-inner {
-  transform: rotateY(180deg);
-}
-
-.card-face {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  overflow: hidden;
-}
-
-.card-face--back {
-  transform: rotateY(180deg);
-}
-
-/* Front face content */
-.countries-flags {
-  font-size: clamp(1.3rem, 4vh, 1.8rem);
-  line-height: 1;
-  margin: clamp(0.1rem, 0.5vh, 0.3rem) 0 clamp(0.08rem, 0.3vh, 0.2rem);
-  letter-spacing: 0.1em;
-}
-
-.countries-count {
-  font-size: clamp(0.62rem, 1.6vh, 0.75rem);
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.flip-hint {
-  font-size: clamp(0.5rem, 1.2vh, 0.58rem);
-  color: var(--green);
-  opacity: 0.6;
-  margin-top: clamp(0.08rem, 0.3vh, 0.15rem);
-  letter-spacing: 0.05em;
-}
-
-/* Back face content */
-.card-face--back {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(0.45rem, 1.4vh, 0.85rem) clamp(0.5rem, 2vw, 0.8rem);
-}
-
-.countries-detail-list {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(0.2rem, 0.8vh, 0.4rem);
+.overlay-list {
+  overflow-y: auto; overflow-x: hidden;
+  padding: 0 1.2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 0.85rem;
   flex: 1;
-  justify-content: center;
-  min-height: 0;
+  -webkit-overflow-scrolling: touch;
 }
 
-.country-detail-item {
-  display: flex;
-  gap: clamp(0.3rem, 1vw, 0.5rem);
-  align-items: center;
-  min-height: 0;
+.overlay-item {
+  display: flex; gap: 1rem; align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
 }
 
-.country-detail-left {
-  flex-shrink: 0;
+.overlay-photo {
+  width: 72px; height: 72px; border-radius: 10px;
+  object-fit: cover; flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
-.country-photo {
-  width: clamp(38px, 10vw, 52px);
-  height: clamp(38px, 10vw, 52px);
-  border-radius: 8px;
-  object-fit: cover;
-  border: 1px solid var(--green-border);
-  display: block;
-}
-
-.country-photo--placeholder {
+.overlay-photo--placeholder {
   background: var(--surface-2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem;
 }
 
-.country-detail-right {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  min-width: 0;
-  flex: 1;
+.overlay-info {
+  display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0;
 }
 
-.country-detail-flag {
-  font-size: clamp(0.75rem, 2vh, 0.95rem);
-  line-height: 1;
+.overlay-item-top {
+  display: flex; align-items: center; gap: 0.4rem;
 }
 
-.country-detail-name {
-  font-size: clamp(0.65rem, 1.7vh, 0.8rem);
-  font-weight: 600;
-  color: var(--text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.overlay-flag { font-size: 1.2rem; line-height: 1; }
+
+.overlay-name {
+  font-size: 1rem; font-weight: 600; color: var(--text-primary);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
-.country-detail-note {
-  font-size: clamp(0.55rem, 1.3vh, 0.65rem);
-  color: var(--green);
-  opacity: 0.85;
+.overlay-note {
+  font-size: 0.78rem; color: var(--green); font-weight: 500;
 }
 
-.country-detail-age {
-  font-size: clamp(0.5rem, 1.2vh, 0.6rem);
-  color: var(--text-muted);
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  flex-shrink: 0;
-  padding: clamp(0.2rem, 0.8vh, 0.45rem) 0 clamp(0.3rem, 1vh, 0.5rem);
-}
-footer p {
-  font-size: clamp(0.55rem, 1.4vh, 0.67rem);
-  color: var(--text-muted);
-  letter-spacing: 0.06em;
+.overlay-age {
+  font-size: 0.72rem; color: var(--text-muted);
 }
