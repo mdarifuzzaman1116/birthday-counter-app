@@ -8,13 +8,12 @@
   --text-secondary: #888;
   --text-muted: #555;
   --accent: #e8c97a;
-  --accent-dim: rgba(232, 201, 122, 0.12);
+  --accent-dim: rgba(232, 201, 122, 0.10);
   --accent-glow: rgba(232, 201, 122, 0.25);
   --timer: #7ab8e8;
-  --timer-dim: rgba(122, 184, 232, 0.10);
+  --timer-dim: rgba(122, 184, 232, 0.08);
   --highlight: #f5e6c0;
-  --radius: 16px;
-  --radius-sm: 10px;
+  --radius: 14px;
 }
 
 *, *::before, *::after {
@@ -23,21 +22,23 @@
   padding: 0;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
-  min-height: 100vh;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  color: var(--text-primary);
-  overflow-x: hidden;
-  padding: 2rem 1rem 3rem;
+html, body {
+  height: 100%;
+  overflow: hidden;
 }
 
-/* Subtle grid background */
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  overflow: hidden;
+  padding: 0 1rem;
+}
+
 .bg-grid {
   position: fixed;
   inset: 0;
@@ -52,151 +53,123 @@ body {
 .container {
   position: relative;
   z-index: 1;
-  max-width: 480px;
   width: 100%;
+  max-width: 460px;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  justify-content: space-between;
+  padding: clamp(0.5rem, 2.5vh, 1.2rem) 0;
 }
 
 /* Header */
 header {
   text-align: center;
-  padding: 2rem 0 0.5rem;
+  flex-shrink: 0;
 }
 
 .star-icon {
-  font-size: 1.1rem;
+  font-size: 0.85rem;
   color: var(--accent);
-  margin-bottom: 0.75rem;
+  margin-bottom: clamp(0.15rem, 0.8vh, 0.4rem);
   display: block;
   letter-spacing: 8px;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 h1 {
   font-family: 'DM Serif Display', serif;
-  font-size: 3.2rem;
+  font-size: clamp(1.8rem, 6vh, 2.6rem);
   font-weight: 400;
   color: var(--text-primary);
-  letter-spacing: 0.02em;
   line-height: 1;
-  margin-bottom: 0.5rem;
+  margin-bottom: clamp(0.1rem, 0.5vh, 0.3rem);
 }
 
 .subtitle {
-  font-size: 0.8rem;
+  font-size: clamp(0.6rem, 1.5vh, 0.72rem);
   color: var(--text-muted);
   font-weight: 400;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-/* Cards layout */
+/* Cards */
 .cards {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: clamp(0.3rem, 1vh, 0.55rem);
+  justify-content: center;
+  padding: clamp(0.3rem, 1.2vh, 0.6rem) 0;
 }
 
 .card-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
+  gap: clamp(0.3rem, 1vh, 0.55rem);
 }
 
-/* Base card */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.25rem 1.4rem;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  padding: clamp(0.5rem, 1.6vh, 0.9rem) clamp(0.75rem, 3vw, 1.1rem);
+  transition: border-color 0.2s ease;
 }
 
-.card:hover {
-  border-color: var(--border-accent);
-  transform: translateY(-2px);
-}
-
-/* Highlight card */
 .card--highlight {
   background: var(--accent-dim);
-  border-color: rgba(232, 201, 122, 0.2);
-  padding: 1.5rem 1.4rem;
+  border-color: rgba(232, 201, 122, 0.18);
 }
 
-.card--highlight:hover {
-  border-color: rgba(232, 201, 122, 0.35);
-}
+.card--highlight .card-label { color: var(--accent); opacity: 0.85; }
+.card--highlight .counter { color: var(--highlight); }
 
-.card--highlight .card-label {
-  color: var(--accent);
-  opacity: 0.8;
-}
-
-.card--highlight .counter {
-  color: var(--highlight);
-}
-
-/* Timer card */
 .card--timer {
   background: var(--timer-dim);
-  border-color: rgba(122, 184, 232, 0.15);
+  border-color: rgba(122, 184, 232, 0.12);
 }
 
-.card--timer:hover {
-  border-color: rgba(122, 184, 232, 0.3);
-}
+.card--timer .card-label { color: var(--timer); opacity: 0.85; }
+.card--timer .counter { color: #a8d4f5; }
 
-.card--timer .card-label {
-  color: var(--timer);
-  opacity: 0.8;
-}
-
-.card--timer .counter {
-  color: #a8d4f5;
-}
-
-/* Card label */
 .card-label {
-  font-size: 0.7rem;
+  font-size: clamp(0.55rem, 1.4vh, 0.65rem);
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 0.5rem;
+  margin-bottom: clamp(0.1rem, 0.5vh, 0.28rem);
 }
 
-/* Counters */
 .counter {
   font-family: 'DM Serif Display', serif;
-  font-size: 2.2rem;
+  font-size: clamp(1.35rem, 4.5vh, 1.9rem);
   font-weight: 400;
   color: var(--text-primary);
   line-height: 1.1;
-  letter-spacing: 0.01em;
 }
 
 .counter--sm {
-  font-size: 1.4rem;
+  font-size: clamp(1rem, 3.2vh, 1.3rem);
 }
 
 .counter--mono {
   font-family: 'DM Sans', monospace;
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 3.2vh, 1.3rem);
   font-weight: 300;
   letter-spacing: 0.04em;
 }
 
-/* Progress bar */
+/* Progress */
 .progress-bar-bg {
-  position: relative;
   background: var(--surface-2);
   border-radius: 100px;
-  height: 6px;
-  overflow: hidden;
-  margin: 0.5rem 0 0.75rem;
+  height: 5px;
+  overflow: visible;
+  margin: clamp(0.25rem, 0.8vh, 0.45rem) 0;
+  position: relative;
 }
 
 .progress-bar-fill {
@@ -210,62 +183,30 @@ h1 {
 .progress-bar-fill::after {
   content: '';
   position: absolute;
-  right: 0;
+  right: -1px;
   top: 50%;
   transform: translateY(-50%);
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #f5e6c0;
-  box-shadow: 0 0 8px 3px var(--accent-glow);
+  box-shadow: 0 0 6px 2px var(--accent-glow);
 }
 
 .progress-label {
-  font-size: 0.78rem;
+  font-size: clamp(0.6rem, 1.5vh, 0.72rem);
   color: var(--text-secondary);
-  font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 /* Footer */
 footer {
   text-align: center;
-  padding: 0.5rem 0 1rem;
+  flex-shrink: 0;
 }
 
 footer p {
-  font-size: 0.75rem;
+  font-size: clamp(0.6rem, 1.5vh, 0.7rem);
   color: var(--text-muted);
   letter-spacing: 0.06em;
-}
-
-/* Mobile */
-@media (max-width: 500px) {
-  body {
-    padding: 1rem 0.75rem 2rem;
-  }
-
-  h1 {
-    font-size: 2.6rem;
-  }
-
-  .card {
-    padding: 1rem 1.1rem;
-  }
-
-  .card--highlight {
-    padding: 1.25rem 1.1rem;
-  }
-
-  .counter {
-    font-size: 1.9rem;
-  }
-
-  .counter--sm {
-    font-size: 1.2rem;
-  }
-
-  .counter--mono {
-    font-size: 1.2rem;
-  }
 }
