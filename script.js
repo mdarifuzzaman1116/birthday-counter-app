@@ -90,7 +90,7 @@ const SA_PHOTO = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAkGBwg
 
 const countriesVisited = [
     {
-        name: 'Saudi Arabia', flag: '🇸🇦', note: 'Makkah', photo: SA_PHOTO, travelDate: '2026-02-26',
+        name: 'Saudi Arabia', flag: '🇸🇦', note: 'Makkah', photo: SA_PHOTO, travelDate: '2026-02-24',
         timeCapsule: {
             flights: {
                 outbound: [
@@ -123,7 +123,7 @@ const countriesVisited = [
                 ]
             },
             arrival: {
-                city: 'Makkah & Madinah, Saudi Arabia · Feb 26 to Mar 2, 2026',
+                city: 'Makkah & Madinah, Saudi Arabia · Feb 25 to Mar 2, 2026',
                 weather: '88-90°F / 31-32°C · Sunny, warm and dry — perfect skies for worship, cool nights',
                 good: [
                     'You performed Umrah at Masjid al-Haram with Inaya — she stood before the Kaaba at just 6 months old',
