@@ -124,22 +124,24 @@ function renderOverlay() {
 function openOverlay() {
     const overlay = document.getElementById('countries-overlay');
     overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
 }
 
 function closeOverlay() {
     const overlay = document.getElementById('countries-overlay');
     overlay.classList.remove('active');
-    document.body.style.overflow = '';
 }
 
 function initCountries() {
     renderCountriesSummary();
     renderOverlay();
+    // Ensure overlay is fully hidden on load
+    const overlay = document.getElementById('countries-overlay');
+    overlay.classList.remove('active');
+
     document.getElementById('countries-card').addEventListener('click', openOverlay);
-    document.getElementById('overlay-close').addEventListener('click', closeOverlay);
-    document.getElementById('countries-overlay').addEventListener('click', e => {
-        if (e.target === document.getElementById('countries-overlay')) closeOverlay();
+    document.getElementById('overlay-close').addEventListener('click', e => { e.stopPropagation(); closeOverlay(); });
+    overlay.addEventListener('click', e => {
+        if (e.target === overlay) closeOverlay();
     });
 }
 
