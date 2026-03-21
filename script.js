@@ -115,11 +115,11 @@ const countriesVisited = [
                     'You performed Umrah at Masjid al-Haram with Inaya — she stood before the Kaaba at just 6 months old',
                     'Makkah was filled with pilgrims from across the Muslim world — millions gathered in prayer together',
                     'Weather was ideal the entire stay — warm days, cool evenings, clear starlit nights, zero rain',
-                    'Saudi Arabia was actively mediating Pakistan-Afghanistan tensions — a sign of the Kingdom's global role'
+                    'Saudi Arabia was actively mediating Pakistan-Afghanistan tensions — a sign of the Kingdom\'s global role'
                 ],
                 bad: [
                     'Feb 28 (while Inaya was in Makkah): US & Israel launched "Operation Epic Fury" — joint strikes on Iran that killed Supreme Leader Khamenei. The Middle East erupted.',
-                    'Iran retaliated with missiles hitting Gulf states — Qatar, UAE, and Saudi Arabia's Ras Tanura oil refinery were all targeted. Regional airspace closed.',
+                    'Iran retaliated with missiles hitting Gulf states — Qatar, UAE, and Saudi Arabia\'s Ras Tanura oil refinery were all targeted. Regional airspace closed.',
                     'Mar 1-2: Iran launched 6+ waves of drone and missile strikes on US bases and Gulf cities — explosions heard in Doha and Dubai as you were preparing to fly home.',
                     'It was one of the most historic and dangerous weeks in the Middle East in decades — and Inaya was right there in the heart of the Muslim world as it unfolded.'
                 ]
