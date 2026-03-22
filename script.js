@@ -273,14 +273,13 @@ function initCountries() {
         if (e.target === overlay) closeOverlay();
     });
 
-    // Capsule book button - delegated from overlay sheet
-    document.getElementById('overlay-sheet').addEventListener('click', e => {
-        const btn = e.target.closest('.capsule-btn');
-        if (btn) {
+    // Attach directly to each capsule button after render
+    document.querySelectorAll('.capsule-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
             e.stopPropagation();
             e.preventDefault();
             window.openCapsule(parseInt(btn.dataset.index));
-        }
+        });
     });
 }
 
@@ -425,20 +424,22 @@ window.openCapsule = function(index) {
         </div>
     `;
 
+    // Scope everything to capsule-body
+    const capsuleBody = document.getElementById('capsule-body');
+    const tabs = capsuleBody.querySelectorAll('.tc-tab');
+    const panels = capsuleBody.querySelectorAll('.tc-tab-content');
+
     // Show first tab, hide others
-    document.querySelectorAll('.tc-tab-content').forEach((el, i) => {
-        el.style.display = i === 0 ? 'block' : 'none';
-    });
+    panels.forEach((el, i) => { el.style.display = i === 0 ? 'block' : 'none'; });
 
     // Tab switching
-    document.querySelectorAll('.tc-tab').forEach(btn => {
+    tabs.forEach(btn => {
         btn.addEventListener('click', () => {
-            document.querySelectorAll('.tc-tab').forEach(b => b.classList.remove('active'));
+            tabs.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             const target = btn.dataset.tab;
-            document.querySelectorAll('.tc-tab-content').forEach(panel => {
+            panels.forEach(panel => {
                 panel.style.display = panel.id === 'tc-tab-' + target ? 'block' : 'none';
-                if (panel.id === 'tc-tab-' + target) panel.scrollTop = 0;
             });
         });
     });
