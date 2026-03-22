@@ -237,7 +237,7 @@ function renderOverlay() {
                 <span class="overlay-age">${ageAtDate(c.travelDate)}</span>
                 <span class="overlay-date">✈ ${formatTravelDate(c.travelDate)}</span>
             </div>
-            ${c.timeCapsule ? `<button class="capsule-btn" onclick="openCapsule(${i})">📖</button>` : ''}
+            ${c.timeCapsule ? `<button class="capsule-btn" data-index="${i}">📖</button>` : ''}
         </div>
     `).join('');
 }
@@ -260,6 +260,15 @@ function initCountries() {
     overlay.classList.remove('active');
 
     document.getElementById('countries-card').addEventListener('click', openOverlay);
+
+    // Attach capsule button listeners after overlay list is rendered
+    document.getElementById('overlay-list').addEventListener('click', e => {
+        const btn = e.target.closest('.capsule-btn');
+        if (btn) {
+            e.stopPropagation();
+            openCapsule(parseInt(btn.dataset.index));
+        }
+    });
     document.getElementById('overlay-close').addEventListener('click', e => { e.stopPropagation(); closeOverlay(); });
     overlay.addEventListener('click', e => {
         if (e.target === overlay) closeOverlay();
