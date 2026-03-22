@@ -255,23 +255,35 @@ function closeOverlay() {
 function initCountries() {
     renderCountriesSummary();
     renderOverlay();
-    // Ensure overlay is fully hidden on load
+
     const overlay = document.getElementById('countries-overlay');
     overlay.classList.remove('active');
 
+    // Open countries sheet
     document.getElementById('countries-card').addEventListener('click', openOverlay);
 
-    // Attach capsule button listeners after overlay list is rendered
+    // Close button
+    document.getElementById('overlay-close').addEventListener('click', e => {
+        e.stopPropagation();
+        closeOverlay();
+    });
+
+    // Tap backdrop to close
+    overlay.addEventListener('click', e => {
+        if (e.target === overlay) closeOverlay();
+    });
+
+    // Capsule book button - stop all propagation so overlay doesn't close
     document.getElementById('overlay-list').addEventListener('click', e => {
         const btn = e.target.closest('.capsule-btn');
         if (btn) {
             e.stopPropagation();
-            openCapsule(parseInt(btn.dataset.index));
+            e.preventDefault();
+            const idx = parseInt(btn.dataset.index);
+            closeOverlay();
+            // Small delay so countries sheet closes before capsule opens
+            setTimeout(() => openCapsule(idx), 300);
         }
-    });
-    document.getElementById('overlay-close').addEventListener('click', e => { e.stopPropagation(); closeOverlay(); });
-    overlay.addEventListener('click', e => {
-        if (e.target === overlay) closeOverlay();
     });
 }
 
@@ -279,6 +291,11 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCounters();
     setInterval(updateCounters, 1000);
     initCountries();
+    // Capsule close
+    document.getElementById('capsule-close').addEventListener('click', closeCapsule);
+    document.getElementById('capsule-overlay').addEventListener('click', e => {
+        if (e.target === document.getElementById('capsule-overlay')) closeCapsule();
+    });
 });
 
 // ── Time Capsule Modal ─────────────────────────────────────────────────────
@@ -436,9 +453,4 @@ function closeCapsule() {
     document.getElementById('capsule-overlay').classList.remove('active');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('capsule-close').addEventListener('click', closeCapsule);
-    document.getElementById('capsule-overlay').addEventListener('click', e => {
-        if (e.target === document.getElementById('capsule-overlay')) closeCapsule();
-    });
-});
+
