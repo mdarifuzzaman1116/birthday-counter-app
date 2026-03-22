@@ -138,7 +138,44 @@ const countriesVisited = [
                     'We decided to get you home as fast as we could. We found the last available seats on a Turkish Airlines flight out of Madinah and rebooked on the spot — flying home through Istanbul, landing March 2nd, five days earlier than planned. We were scared, but we kept you safe. That is all that mattered.'
                 ]
             }
-        }
+        },
+        diary: [
+            {
+                emoji: '✈️',
+                type: 'milestone',
+                text: 'This was your very first time on an airplane, habibti. Your first international flight. We were nervous for you — would you cry? Would you be scared? But you surprised us completely.'
+            },
+            {
+                emoji: '😴',
+                type: 'sweet',
+                text: 'You did not cry a single time on the flight. Not once. You slept almost the entire way from New York to Doha — 12 hours in the air, and you were peaceful the whole time. We kept looking at you and smiling at each other. You were born for this.'
+            },
+            {
+                emoji: '🕋',
+                type: 'milestone',
+                text: 'When we arrived in Makkah and entered Masjid al-Haram, you were asleep in our arms. You did your entire Umrah sleeping. Tawaf — all seven rounds around the Kaaba — and you did not wake up once. The Kaaba was right there, and you were dreaming.'
+            },
+            {
+                emoji: '🌿',
+                type: 'sweet',
+                text: 'Then came Safa and Marwa. You finally woke up halfway through — and even then, you just looked around calmly with those big eyes of yours. You did Safa and Marwa half asleep, half awake. Just like you did everything else on this trip — effortlessly.'
+            },
+            {
+                emoji: '😅',
+                type: 'funny',
+                text: 'Baba has a confession. While we were walking Safa and Marwa, Mama was feeding you and holding you close. Baba was carrying everything else — and in the middle of it all, Baba dropped his phone. Straight onto Mama\'s foot. Hard. Mama winced and said nothing because she was feeding you and did not want to disturb you. Baba felt terrible. We still laugh about it.'
+            },
+            {
+                emoji: '🤲',
+                type: 'reflection',
+                text: 'We want you to know, Inaya — millions of people spend their whole lives hoping to visit these places once. You went before you were even 7 months old. We made dua for you in the holiest places on earth. We asked Allah to make you righteous, to keep you safe, and to always bring you back here with a full heart.'
+            },
+            {
+                emoji: '🌍',
+                type: 'reflection',
+                text: 'And then the world outside changed overnight. A war broke out in the Middle East while we were in Makkah. Airspace closed. Flights were cancelled. We held you tighter, found new tickets, and brought you home safe through Istanbul. It was chaotic and scary. But we had you, and that was enough.'
+            }
+        ]
     },
     {
         name: 'United States', flag: '🇺🇸', note: 'Home', photo: null, travelDate: '2025-08-05',
@@ -339,16 +376,29 @@ function openCapsule(index) {
     document.getElementById('capsule-title').textContent = `${c.flag} ${c.name}`;
     document.getElementById('capsule-age').textContent = `Inaya was ${ageAtDate(c.travelDate)} · ${formatTravelDate(c.travelDate)}`;
 
+    const buildDiaryTab = (diary) => `
+        <div class="tc-tab-content" id="tc-tab-diary">
+            ${diary.map((entry, i) => `
+                <div class="tc-diary-entry">
+                    <div class="tc-diary-num">${String(i+1).padStart(2,'0')}</div>
+                    <div class="tc-diary-bubble ${entry.type || ''}">
+                        ${entry.emoji ? `<span class="tc-diary-emoji">${entry.emoji}</span>` : ''}
+                        <p class="tc-diary-text">${entry.text}</p>
+                    </div>
+                </div>
+            `).join('')}
+            <div class="tc-diary-sig">— Mama & Baba, written with love ✦</div>
+        </div>
+    `;
+
     document.getElementById('capsule-body').innerHTML = `
         <div class="tc-tabs">
             <button class="tc-tab active" data-tab="flights">✈ Flights</button>
-            <button class="tc-tab" data-tab="departure">🛫 Departure</button>
-            <button class="tc-tab" data-tab="arrival">🛬 Arrival</button>
+            <button class="tc-tab" data-tab="diary">📖 Diary</button>
         </div>
         <div class="tc-tab-panels">
             ${buildFlightsTab(tc.flights)}
-            ${buildStoryTab(tc.departure, 'departure')}
-            ${buildStoryTab(tc.arrival, 'arrival')}
+            ${buildDiaryTab(tc.diary)}
         </div>
     `;
 
@@ -365,6 +415,7 @@ function openCapsule(index) {
             const target = btn.dataset.tab;
             document.querySelectorAll('.tc-tab-content').forEach(panel => {
                 panel.style.display = panel.id === 'tc-tab-' + target ? 'block' : 'none';
+                if (panel.id === 'tc-tab-' + target) panel.scrollTop = 0;
             });
         });
     });
