@@ -273,16 +273,13 @@ function initCountries() {
         if (e.target === overlay) closeOverlay();
     });
 
-    // Capsule book button - stop all propagation so overlay doesn't close
-    document.getElementById('overlay-list').addEventListener('click', e => {
+    // Capsule book button - delegated from overlay sheet
+    document.getElementById('overlay-sheet').addEventListener('click', e => {
         const btn = e.target.closest('.capsule-btn');
         if (btn) {
             e.stopPropagation();
             e.preventDefault();
-            const idx = parseInt(btn.dataset.index);
-            closeOverlay();
-            // Small delay so countries sheet closes before capsule opens
-            setTimeout(() => openCapsule(idx), 300);
+            window.openCapsule(parseInt(btn.dataset.index));
         }
     });
 }
@@ -299,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ── Time Capsule Modal ─────────────────────────────────────────────────────
-function openCapsule(index) {
+window.openCapsule = function(index) {
     const c = countriesVisited[index];
     if (!c || !c.timeCapsule) return;
     const tc = c.timeCapsule;
@@ -447,7 +444,7 @@ function openCapsule(index) {
     });
 
     document.getElementById('capsule-overlay').classList.add('active');
-}
+};
 
 function closeCapsule() {
     document.getElementById('capsule-overlay').classList.remove('active');
