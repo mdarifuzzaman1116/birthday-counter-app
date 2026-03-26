@@ -237,9 +237,21 @@ function renderOverlay() {
                 <span class="overlay-age">${ageAtDate(c.travelDate)}</span>
                 <span class="overlay-date">✈ ${formatTravelDate(c.travelDate)}</span>
             </div>
-            ${c.timeCapsule ? `<button class="capsule-btn" data-index="${i}">📖</button>` : ''}
+            ${c.timeCapsule ? `<button class="capsule-btn" id="capsule-btn-${i}">📖</button>` : ''}
         </div>
     `).join('');
+
+    // Attach listeners directly to each button RIGHT NOW while DOM is fresh
+    countriesVisited.forEach((c, i) => {
+        if (!c.timeCapsule) return;
+        const btn = document.getElementById(`capsule-btn-${i}`);
+        if (!btn) return;
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            window.openCapsule(i);
+        });
+    });
 }
 
 function openOverlay() {
@@ -273,14 +285,7 @@ function initCountries() {
         if (e.target === overlay) closeOverlay();
     });
 
-    // Attach directly to each capsule button after render
-    document.querySelectorAll('.capsule-btn').forEach(btn => {
-        btn.addEventListener('click', e => {
-            e.stopPropagation();
-            e.preventDefault();
-            window.openCapsule(parseInt(btn.dataset.index));
-        });
-    });
+    // capsule btn listeners now attached inside renderOverlay()
 }
 
 document.addEventListener('DOMContentLoaded', () => {
